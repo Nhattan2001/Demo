@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Demo3.Models.SANPHAM>
+
+@{
+    ViewBag.Title = "Index";
+}
+    <h2>SẢN PHẨM</h2>
+<style type="text/css">
+    h2{
+        
+          padding: 15px;
+          text-align:center;
+    }
+</style>
+
+
+<p>
+    @Html.ActionLink("GIỎ HÀNG", "Index", "GioHang", new { area = "" }, null)
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TENSP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DONGIA)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TENSP)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DONGIA)
+        </td>
+        <td>
+            <a href="@Url.Action("Create","SanPham")" class="btn btn-default"><i class="fa fa-plus"></i>THÊM</a>
+            <a href="@Url.Action("Edit","SanPham")" class="btn btn-default"><i class="fa fa-pencil"></i>SỬA</a>
+            <a href="@Url.Action("Delete","SanPham")" class="btn btn-default"><i class="fa fa-trash"></i>XÓA</a>
+            @*@Html.ActionLink("THÊM VÀO GIỎ HÀNG", "Index", "GioHang", new { area = "" }, null)*@
+        </td>
+    </tr>
+}
+
+</table>

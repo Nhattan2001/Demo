@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Demo3.Models.GIOHANG>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>GIỎ HÀNG</h2>
+<style>
+    p.link {
+        border: 2px outset #322a2d;
+        border-width: 3px;
+        width: 40px;
+    }
+
+    p.editsl {
+        width: 40px;
+    }
+</style>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MASP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MAKH)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SOLUONG)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.THANHTIEN)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MASP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MAKH)
+            </td>
+            <td>
+                <p class="editsl">@Html.EditorFor(modelItem => item.SOLUONG)</p>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.THANHTIEN)
+            </td>
+            <td>
+                <p class="link">
+                    @Html.ActionLink("MUA", "Edit", new { /* id=item.PrimaryKey */ })
+                </p>
+                @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
+                <p class="link">@Html.ActionLink("HỦY", "Delete", new { /* id=item.PrimaryKey */ })</p>
+
+            </td>
+        </tr>
+    }
+
+</table>
+@section scripts{
+    <script>
+        $(function () {
+            var successMessage = '@TempData["Thành Công!!!"]'
+            if (successMessage != '')
+                alertify.success(successMessage);
+        }); 
+
+        function Delete(id) {
+            alertify.confirm('Thông báo','Bạn có chắc muốn hủy???',function(){
+                window.location.href  = '@Url.Action("Delete","GioHang")/'+id;
+            },null );
+        }
+    </script>
+}
